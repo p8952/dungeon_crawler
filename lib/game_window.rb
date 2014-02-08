@@ -3,7 +3,11 @@ class GameWindow < Gosu::Window
 	def initialize
 		super(720, 720, false)
 		self.caption = "Gosu"
+		
 		@background = Gosu::Image.new(self, 'media/background.png', false)
+	
+		@dungeon = DungeonGenerator.new(self)
+
 		@player = Player.new(self)
 		@x_target = @player.x_pos
 		@y_target = @player.y_pos
@@ -45,6 +49,7 @@ class GameWindow < Gosu::Window
 
 	def draw
 		@background.draw(0, 0, 0)
+		@dungeon.draw
 		@player.draw
 	end
 
