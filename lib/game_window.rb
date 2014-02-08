@@ -5,8 +5,8 @@ class GameWindow < Gosu::Window
 		self.caption = "Gosu"
 		@background = Gosu::Image.new(self, 'media/background.png', false)
 		@player = Player.new(self)
-		@x_target = @player.get_x
-		@y_target = @player.get_y
+		@x_target = @player.x_pos
+		@y_target = @player.y_pos
 	end
 
 	def button_down(id)
@@ -17,25 +17,25 @@ class GameWindow < Gosu::Window
 
 	def update
 		if button_down?(Gosu::KbRight)
-			if @player.get_x == @x_target
+			if @player.x_pos == @x_target
 				@x_target += 24
 			end
 		end
 
 		if button_down?(Gosu::KbLeft)
-			if @player.get_x == @x_target
+			if @player.x_pos == @x_target
 				@x_target += -24
 			end
 		end
 		
 		if button_down?(Gosu::KbUp)
-			if @player.get_y == @y_target
+			if @player.y_pos == @y_target
 				@y_target += -24
 			end
 		end
 		
 		if button_down?(Gosu::KbDown)
-			if @player.get_y == @y_target
+			if @player.y_pos == @y_target
 				@y_target += 24
 			end
 		end
