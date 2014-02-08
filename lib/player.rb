@@ -30,7 +30,7 @@ class Player
 	end
 	
 	def draw
-		@image.draw(@x_pos, @y_pos, 1)
+		@image.draw(@x_pos, @y_pos, 99)
 	end
 
 end
