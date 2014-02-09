@@ -1,16 +1,17 @@
 class DungeonGenerator
-	
+	attr_accessor :rooms
+
 	def initialize(game_window)
 		
 		# Start generating new rooms, rejecting ones which are out of bounds
 		# or overlap existing rooms
 		@rooms = []
 		@counter = 0
-		until @rooms.length == 7
+		until @rooms.length == 5
 			
 			# If we can't fit all the rooms in after 1000 attempts
 			# clear the current dungeon and start again
-			if @counter > 10000
+			if @counter > 1000
 				@rooms.clear
 				@counter = 0
 			else
@@ -60,35 +61,55 @@ class DungeonGenerator
 end
 
 class Room
-	attr_accessor :x_origin, :y_origin, :width, :height
+	attr_accessor :x_origin, :y_origin, :width, :height, :walls
 
 	def initialize(game_window)
 		@game_window = game_window
-		@COLOR0 = Gosu::Color.new(0xFF000000)
-		@COLOR1 = Gosu::Color.new(0xFF1EB1FA)
+		
 		@x_origin = (((rand(720) / 24).round * 24) + 24)
 		@y_origin = (((rand(720) / 24).round * 24) + 24)
-		@width = ((rand(7) + 5) * 24)
-		@height = ((rand(7) + 5) * 24)
+		@width = ((rand(5) + 5) * 24)
+		@height = ((rand(5) + 5) * 24)
+		
+		@walls = []
+
+		(@width / 24).times do |x|
+			@walls << Wall.new(game_window, (@x_origin + (x * 24)), (@y_origin - @height))
+		end
+
+		(@width / 24).times do |x|
+			@walls << Wall.new(game_window, (@x_origin + (x * 24)), (@y_origin -24))
+		end
+
+		(@height / 24).times do |y|
+			@walls << Wall.new(game_window, @x_origin, ((@y_origin - @height) + (y * 24)))
+		end
+	
+		(@height / 24).times do |y|
+			@walls << Wall.new(game_window, ((@x_origin + @width) - 24), ((@y_origin - @height) + (y * 24)))
+		end
+
 	end
 
 	def draw
-		
-		@game_window.draw_quad(
-			@x_origin, @y_origin, @COLOR0,
-			(@x_origin + @width), @y_origin, @COLOR0,
-			@x_origin, (@y_origin - @height), @COLOR0,
-			(@x_origin + @width), (@y_origin - @height), @COLOR0,
-			1
-		)
+		@walls.each do |wall|
+			wall.draw
+		end
+	end
 
-		@game_window.draw_quad(
-			@x_origin + 24, @y_origin - 24, @COLOR1,
-			(@x_origin + @width) - 24, @y_origin - 24, @COLOR1,
-			@x_origin + 24, (@y_origin - @height) + 24, @COLOR1,
-			(@x_origin + @width) - 24, (@y_origin - @height) + 24, @COLOR1,
-			2
-		)
+end
+
+class Wall
+	attr_accessor :x_origin, :y_origin
+
+	def initialize(game_window, x_origin, y_origin)
+		@wall = Gosu::Image.new(game_window, 'media/wall.png', false)
+		@x_origin = x_origin
+		@y_origin = y_origin
+	end
+
+	def draw
+		@wall.draw(x_origin, y_origin, 3)
 	end
 
 end
