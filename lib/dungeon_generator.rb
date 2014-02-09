@@ -2,23 +2,31 @@ class DungeonGenerator
 	
 	def initialize(game_window)
 		
-		# Create an array of rooms and add the first room
-		@rooms = []
-		@rooms << Room.new(game_window)
-
 		# Start generating new rooms, rejecting ones which are out of bounds
 		# or overlap existing rooms
-		until @rooms.length == 5
+		@rooms = []
+		@counter = 0
+		until @rooms.length == 7
+			
+			# If we can't fit all the rooms in after 1000 attempts
+			# clear the current dungeon and start again
+			if @counter > 10000
+				@rooms.clear
+				@counter = 0
+			else
+				@counter += 1
+			end
+
 			@new_room = Room.new(game_window)
 			@usable = true
 			
 			# Reject if room is out of bounds on the x-axis
-			if (@new_room.x_origin + @new_room.width) > 720
+			if (@new_room.x_origin + @new_room.width + 24) > 720
 				@usable = false
 			end
 
 			# Reject if room is out of bounds on the y-axis
-			if (@new_room.y_origin - @new_room.height) < 0
+			if (@new_room.y_origin - @new_room.height - 24) < 0
 				@usable = false
 			end
 		
@@ -39,6 +47,7 @@ class DungeonGenerator
 			if @usable == true
 				@rooms << @new_room
 			end
+
 		end
 	end
 
@@ -55,20 +64,30 @@ class Room
 
 	def initialize(game_window)
 		@game_window = game_window
-		@COLOR = Gosu::Color.new(0xFF1EB1FA)
-		@x_origin = ((rand(720) / 24).round * 24)
-		@y_origin = ((rand(720) / 24).round * 24)
-		@width = (rand(10) + 5) * 24
-		@height = (rand(10) + 5) * 24
+		@COLOR0 = Gosu::Color.new(0xFF000000)
+		@COLOR1 = Gosu::Color.new(0xFF1EB1FA)
+		@x_origin = (((rand(720) / 24).round * 24) + 24)
+		@y_origin = (((rand(720) / 24).round * 24) + 24)
+		@width = ((rand(7) + 5) * 24)
+		@height = ((rand(7) + 5) * 24)
 	end
 
 	def draw
+		
 		@game_window.draw_quad(
-			@x_origin, @y_origin, @COLOR,
-			(@x_origin + @width), @y_origin, @COLOR,
-			@x_origin, (@y_origin - @height), @COLOR,
-			(@x_origin + @width), (@y_origin - @height), @COLOR,
+			@x_origin, @y_origin, @COLOR0,
+			(@x_origin + @width), @y_origin, @COLOR0,
+			@x_origin, (@y_origin - @height), @COLOR0,
+			(@x_origin + @width), (@y_origin - @height), @COLOR0,
 			1
+		)
+
+		@game_window.draw_quad(
+			@x_origin + 24, @y_origin - 24, @COLOR1,
+			(@x_origin + @width) - 24, @y_origin - 24, @COLOR1,
+			@x_origin + 24, (@y_origin - @height) + 24, @COLOR1,
+			(@x_origin + @width) - 24, (@y_origin - @height) + 24, @COLOR1,
+			2
 		)
 	end
 
