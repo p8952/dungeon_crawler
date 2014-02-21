@@ -1,6 +1,14 @@
 #!/usr/bin/env ruby
 
-require 'gosu'
+
+begin
+	gem 'gosu'
+	require 'gosu'
+rescue Gem::LoadError
+	puts 'Gosu not installed: gem install gosu --no-ri --no-rdoc'
+	exit 1
+end
+
 require_relative '../lib/game_window'
 require_relative '../lib/player'
 require_relative '../lib/dungeon_generator'
