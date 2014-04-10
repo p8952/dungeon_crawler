@@ -4,10 +4,7 @@ class GameWindow < Gosu::Window
 		super(720, 720, false)
 		self.caption = "Gosu"
 		
-		@background = Gosu::Image.new(self, 'media/background.png', false)
-	
-		@dungeon = DungeonGenerator.new(self)
-
+		@cave = Cave.new(self, 720, 720)
 		@player = Player.new(self)
 		@x_target = @player.x_pos
 		@y_target = @player.y_pos
@@ -56,19 +53,18 @@ class GameWindow < Gosu::Window
 	end
 
 	def path_clear(x_target, y_target)
-		@dungeon.rooms.each do |room|
-			room.walls.each do |wall|
-				if x_target == wall.x_origin and y_target == wall.y_origin
-				 	return false
-				end
+		@cave.cells.each do |pos, cell|
+			if cell.x_pos == x_target and 
+			   cell.y_pos == y_target and 
+			   cell.state == 'wall'
+				return false
 			end
 		end
 		return true
 	end
 
 	def draw
-		@background.draw(0, 0, 0)
-		@dungeon.draw
+		@cave.draw
 		@player.draw
 	end
 

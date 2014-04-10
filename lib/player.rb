@@ -4,8 +4,8 @@ class Player
 
 	def initialize(game_window)
 		@image = Gosu::Image.new(game_window, 'media/player.png', false)
-		@x_pos = 0
-		@y_pos = 0
+		@x_pos = 24
+		@y_pos = 24
 		@speed = 1
 	end
 

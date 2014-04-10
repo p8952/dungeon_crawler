@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-
 begin
 	gem 'gosu'
 	require 'gosu'
@@ -9,9 +8,9 @@ rescue Gem::LoadError
 	exit 1
 end
 
+require_relative '../lib/cave'
 require_relative '../lib/game_window'
 require_relative '../lib/player'
-require_relative '../lib/dungeon_generator'
 
 @game_window = GameWindow.new
 @game_window.show
