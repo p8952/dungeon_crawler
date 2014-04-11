@@ -2,8 +2,8 @@ class Player
 
 	attr_accessor :x_pos, :y_pos
 
-	def initialize(game_window, spritesheet)
-		@sprite = [spritesheet[6], spritesheet[7]]
+	def initialize()
+		@sprite = [$spritesheet[6], $spritesheet[7]]
 		@x_pos = 24
 		@y_pos = 24
 		@speed = 1

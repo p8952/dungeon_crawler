@@ -12,5 +12,5 @@ require_relative '../lib/cave'
 require_relative '../lib/game_window'
 require_relative '../lib/player'
 
-@game_window = GameWindow.new
-@game_window.show
+game_window = GameWindow.new
+game_window.show

@@ -2,11 +2,11 @@ class Cave
 
 	attr_accessor :cells
 
-	def initialize(game_window, width, height, spritesheet)
+	def initialize(width, height)
 		@cells = {}
 		(height / 24).times do |y|
 			(width / 24).times do |x|
-				@cells["#{(y * 24)} #{(x * 24)}"] = Cell.new(game_window, (y * 24), (x * 24), spritesheet)
+				@cells["#{(y * 24)} #{(x * 24)}"] = Cell.new((y * 24), (x * 24))
 			end
 		end
 
@@ -61,11 +61,9 @@ class Cell
 
 	attr_accessor :state, :x_pos, :y_pos
 
-	def initialize(game_window, x_pos, y_pos, spritesheet)
-		@game_window = game_window
+	def initialize(x_pos, y_pos)
 		@x_pos = x_pos
 		@y_pos = y_pos
-		@spritesheet = spritesheet
 
 		case rand(100) + 1
 			when 1..50 then
@@ -80,9 +78,9 @@ class Cell
 		unless @state == state
 			@state = state
 			if state == 'wall'
-				@sprite = @spritesheet[10]
+				@sprite = $spritesheet[10]
 			else
-				@sprite = @spritesheet[11]
+				@sprite = $spritesheet[11]
 			end
 		end
 	end

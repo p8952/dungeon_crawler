@@ -4,9 +4,10 @@ class GameWindow < Gosu::Window
 		super(720, 720, false)
 		self.caption = "Gosu"
 	
-		spritesheet = Gosu::Image.load_tiles(self, 'media/spritesheet.png', 24, 24, false)
-		@cave = Cave.new(self, 720, 720, spritesheet)
-		@player = Player.new(self, spritesheet)
+		$spritesheet = Gosu::Image.load_tiles(self, 'media/spritesheet.png', 24, 24, false)
+		
+		@cave = Cave.new(720, 720)
+		@player = Player.new()
 		@x_target = @player.x_pos
 		@y_target = @player.y_pos
 	end
