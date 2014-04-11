@@ -2,8 +2,8 @@ class Player
 
 	attr_accessor :x_pos, :y_pos
 
-	def initialize(game_window)
-		@image = Gosu::Image.new(game_window, 'media/player.png', false)
+	def initialize(game_window, spritesheet)
+		@sprite = [spritesheet[6], spritesheet[7]]
 		@x_pos = 24
 		@y_pos = 24
 		@speed = 1
@@ -30,7 +30,7 @@ class Player
 	end
 	
 	def draw
-		@image.draw(@x_pos, @y_pos, 99)
+		@sprite[Gosu::milliseconds / 500 % 2].draw(@x_pos, @y_pos, 99)
 	end
 
 end

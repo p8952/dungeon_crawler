@@ -2,11 +2,11 @@ class Cave
 
 	attr_accessor :cells
 
-	def initialize(game_window, width, height)
+	def initialize(game_window, width, height, spritesheet)
 		@cells = {}
 		(height / 24).times do |y|
 			(width / 24).times do |x|
-				@cells["#{(y * 24)} #{(x * 24)}"] = Cell.new(game_window, (y * 24), (x * 24))
+				@cells["#{(y * 24)} #{(x * 24)}"] = Cell.new(game_window, (y * 24), (x * 24), spritesheet)
 			end
 		end
 
@@ -61,11 +61,12 @@ class Cell
 
 	attr_accessor :state, :x_pos, :y_pos
 
-	def initialize(game_window, x_pos, y_pos)
+	def initialize(game_window, x_pos, y_pos, spritesheet)
 		@game_window = game_window
 		@x_pos = x_pos
 		@y_pos = y_pos
-		
+		@spritesheet = spritesheet
+
 		case rand(100) + 1
 			when 1..50 then
 				set_state('ground')
@@ -78,7 +79,11 @@ class Cell
 	def set_state(state)
 		unless @state == state
 			@state = state
-			@sprite = Gosu::Image.new(@game_window, "media/#{state}.png", false)
+			if state == 'wall'
+				@sprite = @spritesheet[10]
+			else
+				@sprite = @spritesheet[11]
+			end
 		end
 	end
 
@@ -96,7 +101,7 @@ class Cell
 	end
 
 	def draw
-		@sprite.draw(@x_pos, @y_pos, 3)
+		@sprite.draw(@x_pos, @y_pos, 0)
 	end
 
 end
