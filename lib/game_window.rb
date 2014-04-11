@@ -53,14 +53,12 @@ class GameWindow < Gosu::Window
 	end
 
 	def path_clear(x_target, y_target)
-		@cave.cells.each do |pos, cell|
-			if cell.x_pos == x_target and 
-			   cell.y_pos == y_target and 
-			   cell.state == 'wall'
-				return false
-			end
+		if @cave.cells["#{x_target} #{y_target}"].nil? or
+		   @cave.cells["#{x_target} #{y_target}"].state == 'wall'
+		   	return false
+		else
+			return true
 		end
-		return true
 	end
 
 	def draw
