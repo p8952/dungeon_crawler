@@ -7,6 +7,7 @@ class Player
 		@x_pos = 24
 		@y_pos = 24
 		@speed = 1
+		$game_objects << self
 	end
 
 	def move(x_target, y_target)

@@ -5,6 +5,7 @@ class GameWindow < Gosu::Window
 		self.caption = "Gosu"
 	
 		$spritesheet = Gosu::Image.load_tiles(self, 'media/spritesheet.png', 24, 24, false)
+		$game_objects = []
 		
 		@cave = Cave.new(720, 720)
 		@player = Player.new()
@@ -65,7 +66,7 @@ class GameWindow < Gosu::Window
 
 	def draw
 		@cave.draw
-		@player.draw
+		$game_objects.each { |obj| obj.draw }
 	end
 
 end
