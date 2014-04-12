@@ -58,6 +58,13 @@ class Player
 	end
 
 	def update()
+		if @y_pos > @y_target
+			@y_pos += -@speed
+		end
+
+		if @y_pos < @y_target
+			@y_pos += @speed
+		end
 
 		if @x_pos < @x_target
 			@x_pos += @speed
@@ -65,14 +72,6 @@ class Player
 		
 		if @x_pos > @x_target
 			@x_pos += -@speed
-		end
-		
-		if @y_pos < @y_target
-			@y_pos += @speed
-		end
-
-		if @y_pos > @y_target
-			@y_pos += -@speed
 		end
 			
 	end
