@@ -13,26 +13,16 @@ class GameWindow < Gosu::Window
 		@player = Player.new()
 	end
 
+	def button_down(id)
+		close if id == Gosu::KbEscape
+		@player.action(:attack) if id == Gosu::KbA
+	end
+
 	def update
-		if button_down?(Gosu::KbEscape)
-			close
-		end
-
-		if button_down?(Gosu::KbUp)
-			@player.move(:up)
-		end
-		
-		if button_down?(Gosu::KbDown)
-			@player.move(:down)
-		end
-
-		if button_down?(Gosu::KbRight)
-			@player.move(:right)
-		end
-
-		if button_down?(Gosu::KbLeft)
-			@player.move(:left)
-		end
+		@player.action(:up) if button_down?(Gosu::KbUp)
+		@player.action(:down) if button_down?(Gosu::KbDown)
+		@player.action(:right) if button_down?(Gosu::KbRight)
+		@player.action(:left) if button_down?(Gosu::KbLeft)
 
 		$game_objects.each { |obj| obj.update }
 	end

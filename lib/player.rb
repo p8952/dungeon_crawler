@@ -21,9 +21,9 @@ class Player
 		end
 	end
 
-	def move(button)
+	def action(action)
 
-		if button == :up
+		if action == :up
 			if @y_pos == @y_target
 				if path_clear(@x_target, @y_target - 24)
 					@y_target += -24
@@ -31,7 +31,7 @@ class Player
 			end
 		end
 		
-		if button == :down
+		if action == :down
 			if @y_pos == @y_target
 				if path_clear(@x_target, @y_target + 24)
 					@y_target += 24
@@ -39,7 +39,7 @@ class Player
 			end
 		end
 
-		if button == :right
+		if action == :right
 			if @x_pos == @x_target
 				if path_clear(@x_target + 24, @y_target)
 					@x_target += 24
@@ -47,7 +47,7 @@ class Player
 			end
 		end
 
-		if button == :left
+		if action == :left
 			if @x_pos == @x_target
 				if path_clear(@x_target - 24, @y_target)
 					@x_target += -24
@@ -55,9 +55,14 @@ class Player
 			end
 		end
 
+		if action == :attack
+			Attack.new(@x_pos, @y_pos, :east, 5) 
+		end
+
 	end
 
 	def update()
+		
 		if @y_pos > @y_target
 			@y_pos += -@speed
 		end
