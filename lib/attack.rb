@@ -1,9 +1,14 @@
-class Attack
+class Attack < GameObject
 
-	attr_accessor :x_target, :y_target
-	
 	def initialize(x_pos, y_pos, direction, range)
-		@sprite = $spritesheet[18]
+		super()
+		
+		if range == 1
+			@sprite = $spritesheet[22]
+		else
+			@sprite = $spritesheet[18]
+		end
+
 		@x_pos = (x_pos / 24).to_f.round * 24
 		@y_pos =  (y_pos / 24).to_f.round * 24
 
@@ -20,37 +25,13 @@ class Attack
 			@x_target = @x_pos - (range * 24)
 			@y_target = @y_pos
 		end
-
-		@speed = 1
-		$game_objects << self
 	end
 
 	def update()
-
-		if @y_pos > @y_target
-			@y_pos += -@speed
-		end
-
-		if @y_pos < @y_target
-			@y_pos += @speed
-		end
-
-		if @x_pos < @x_target
-			@x_pos += @speed
-		end
-		
-		if @x_pos > @x_target
-			@x_pos += -@speed
-		end
-		
+		super
 		if @x_pos == @x_target and @y_pos == @y_target
 			$game_objects.delete(self)
 		end
-
-	end
-
-	def draw
-		@sprite.draw(@x_pos, @y_pos, 99)
 	end
 
 end

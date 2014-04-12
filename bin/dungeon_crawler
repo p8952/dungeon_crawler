@@ -8,10 +8,11 @@ rescue Gem::LoadError
 	exit 1
 end
 
-require_relative '../lib/attack'
-require_relative '../lib/cave'
 require_relative '../lib/game_window'
+require_relative '../lib/game_object'
+require_relative '../lib/cave'
 require_relative '../lib/player'
+require_relative '../lib/attack'
 
 $game_window = GameWindow.new
 $game_window.show
