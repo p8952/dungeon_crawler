@@ -2,7 +2,7 @@ class Player < GameObject
 
 	def initialize()
 		super
-		@sprite = [$spritesheet[8], $spritesheet[9]]
+		@sprite = [$spritesheet[2], $spritesheet[3]]
 	end
 
 	def path_clear(x_target, y_target)

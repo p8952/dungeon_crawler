@@ -4,9 +4,10 @@ class Attack < GameObject
 		super()
 		
 		if range == 1
-			@sprite = $spritesheet[22]
+			@sprite = $spritesheet[16]
 		else
-			@sprite = $spritesheet[18]
+			@speed = 2
+			@sprite = $spritesheet[12]
 		end
 
 		@x_pos = (x_pos / 24).to_f.round * 24

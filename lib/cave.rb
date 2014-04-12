@@ -78,9 +78,9 @@ class Cell
 		unless @state == state
 			@state = state
 			if state == 'wall'
-				@sprite = $spritesheet[10]
+				@sprite = $spritesheet[4]
 			else
-				@sprite = $spritesheet[11]
+				@sprite = $spritesheet[5]
 			end
 		end
 	end
