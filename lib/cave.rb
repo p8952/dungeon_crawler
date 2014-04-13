@@ -6,7 +6,7 @@ class Cave
 		@cells = {}
 		(height / 24).times do |y|
 			(width / 24).times do |x|
-				@cells["#{(y * 24)} #{(x * 24)}"] = Cell.new((y * 24), (x * 24))
+				@cells["#{(y * 24)} #{(x * 24)}"] = Cell.new((y * 24), (x * 24), :blocking)
 			end
 		end
 
@@ -18,12 +18,12 @@ class Cave
 			@cells.each do |pos, cell|
 				
 				neighbors_filled = 0
-				neighbors_filled += 1 if cell.state == 'wall'
+				neighbors_filled += 1 if cell.state == :blocking
 				
 				cell.get_neighbors.each do |neighbor|
 					neighbor = @cells["#{neighbor[0]} #{neighbor[1]}"]
 					unless neighbor.nil?
-						if neighbor.state == 'wall'
+						if neighbor.state == :blocking
 							neighbors_filled += 1
 						end
 					end
@@ -37,19 +37,19 @@ class Cave
 			
 			end
 		
-			pending_wall.each do |cell|
-				cell.set_state('wall')
-			end
-			
 			pending_ground.each do |cell|
-				cell.set_state('ground')
+				cell.set_state(:non_blocking)
 			end
 	
+			pending_wall.each do |cell|
+				cell.set_state(:blocking)
+			end
+
 		end
 
 	end
 
-	def draw
+	def draw()
 		@cells.each do |pos, cell|
 			cell.draw
 		end
@@ -57,19 +57,22 @@ class Cave
 
 end
 
-class Cell
+class Cell < StaticObject
 
-	attr_accessor :state, :x_pos, :y_pos
+	attr_accessor :x_pos, :y_pos, :state
 
-	def initialize(x_pos, y_pos)
+	def initialize(x_pos, y_pos, state)
+		super()
+
+		@sprite = $spritesheet[4]
 		@x_pos = x_pos
 		@y_pos = y_pos
 
 		case rand(100) + 1
 			when 1..50 then
-				set_state('ground')
+				set_state(:non_blocking)
 			when 51..100
-				set_state('wall')
+				set_state(:blocking)
 		end
 		
 	end
@@ -77,7 +80,7 @@ class Cell
 	def set_state(state)
 		unless @state == state
 			@state = state
-			if state == 'wall'
+			if state == :blocking
 				@sprite = $spritesheet[4]
 			else
 				@sprite = $spritesheet[5]
@@ -85,7 +88,7 @@ class Cell
 		end
 	end
 
-	def get_neighbors
+	def get_neighbors()
 		return [
 			[@x_pos - 24, @y_pos - 24],
 			[@x_pos, @y_pos - 24],
@@ -98,7 +101,11 @@ class Cell
 		]
 	end
 
-	def draw
+	def update()
+
+	end
+
+	def draw()
 		@sprite.draw(@x_pos, @y_pos, 0)
 	end
 

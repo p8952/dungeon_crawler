@@ -2,7 +2,7 @@ class GameWindow < Gosu::Window
 
 	attr_accessor :cave
 
-	def initialize
+	def initialize()
 		super(720, 720, false)
 		self.caption = "Gosu"
 	
@@ -19,7 +19,7 @@ class GameWindow < Gosu::Window
 		@player.action(:attack_far) if id == Gosu::KbD
 	end
 
-	def update
+	def update()
 		@player.action(:up) if button_down?(Gosu::KbUp)
 		@player.action(:down) if button_down?(Gosu::KbDown)
 		@player.action(:right) if button_down?(Gosu::KbRight)
@@ -28,8 +28,7 @@ class GameWindow < Gosu::Window
 		$game_objects.each { |obj| obj.update }
 	end
 
-	def draw
-		@cave.draw
+	def draw()
 		$game_objects.each { |obj| obj.draw }
 	end
 

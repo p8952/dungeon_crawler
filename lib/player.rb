@@ -7,7 +7,7 @@ class Player < MovingObject
 
 	def path_clear(x_target, y_target)
 		if $game_window.cave.cells["#{x_target} #{y_target}"].nil? or
-		   $game_window.cave.cells["#{x_target} #{y_target}"].state == 'wall'
+		   $game_window.cave.cells["#{x_target} #{y_target}"].state == :blocking
 		   	return false
 		else
 			return true
@@ -58,7 +58,7 @@ class Player < MovingObject
 
 	end
 
-	def draw
+	def draw()
 		@sprite[Gosu::milliseconds / 500 % 2].draw(@x_pos, @y_pos, 99)
 	end
 

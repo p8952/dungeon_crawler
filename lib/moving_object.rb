@@ -10,7 +10,7 @@ class MovingObject < StaticObject
 	end
 
 	def update()
-
+		
 		if @y_pos > @y_target
 			@y_pos += -@speed
 		end
@@ -26,7 +26,7 @@ class MovingObject < StaticObject
 		if @x_pos > @x_target
 			@x_pos += -@speed
 		end
-			
+	
 	end
 	
 end
