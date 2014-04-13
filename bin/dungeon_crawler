@@ -9,7 +9,8 @@ rescue Gem::LoadError
 end
 
 require_relative '../lib/game_window'
-require_relative '../lib/game_object'
+require_relative '../lib/static_object'
+require_relative '../lib/moving_object'
 require_relative '../lib/cave'
 require_relative '../lib/player'
 require_relative '../lib/attack'

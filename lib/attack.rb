@@ -1,4 +1,4 @@
-class Attack < GameObject
+class Attack < MovingObject
 
 	def initialize(x_pos, y_pos, direction, range)
 		super()

@@ -1,4 +1,4 @@
-class Player < GameObject
+class Player < MovingObject
 
 	def initialize()
 		super
