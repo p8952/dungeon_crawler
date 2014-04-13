@@ -10,9 +10,9 @@ class Attack < MovingObject
 			@sprite = $spritesheet[12]
 		end
 
-		@x_pos = (x_pos / 24).to_f.round * 24
-		@y_pos =  (y_pos / 24).to_f.round * 24
-
+		@x_pos = x_pos
+		@y_pos = y_pos
+		
 		if direction == :north
 			@x_target = @x_pos
 			@y_target = @y_pos - (range * 24)
