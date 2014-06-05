@@ -2,7 +2,7 @@ class Player < MovingObject
 
 	def initialize()
 		super
-		@sprite = [$spritesheet[8], $spritesheet[9]]
+		@sprite = [$spritesheet[2], $spritesheet[3]]
 	end
 
 	def draw()

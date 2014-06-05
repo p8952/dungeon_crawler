@@ -2,7 +2,7 @@ class Creep < MovingObject
 
 	def initialize()
 		super
-		@sprite = [$spritesheet[2], $spritesheet[3]]
+		@sprite = [$spritesheet[4], $spritesheet[5]]
 	end
 
 	def update()

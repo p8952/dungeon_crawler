@@ -3,7 +3,7 @@ class StaticObject
 	attr_accessor :sprite, :x_pos, :y_pos, :state
 
 	def initialize()
-		@sprite = $spritesheet[16]
+		@sprite = $spritesheet[6]
 		@x_pos = 0
 		@y_pos = 0
 		@state = :blocking

@@ -64,7 +64,7 @@ class Cell < StaticObject
 	def initialize(x_pos, y_pos, state)
 		super()
 
-		@sprite = $spritesheet[10]
+		@sprite = $spritesheet[6]
 		@x_pos = x_pos
 		@y_pos = y_pos
 
@@ -81,9 +81,9 @@ class Cell < StaticObject
 		unless @state == state
 			@state = state
 			if state == :blocking
-				@sprite = $spritesheet[10]
+				@sprite = $spritesheet[6]
 			else
-				@sprite = $spritesheet[11]
+				@sprite = $spritesheet[7]
 			end
 		end
 	end
