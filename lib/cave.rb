@@ -69,7 +69,7 @@ class Cell < StaticObject
 		@y_pos = y_pos
 
 		case rand(100) + 1
-			when 1..50 then
+			when 1..50
 				set_state(:non_blocking)
 			when 51..100
 				set_state(:blocking)

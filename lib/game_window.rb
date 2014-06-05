@@ -11,6 +11,7 @@ class GameWindow < Gosu::Window
 		
 		@cave = Cave.new(720, 720)
 		@player = Player.new()
+		5.times { Creep.new() }
 	end
 
 	def update()
