@@ -13,13 +13,8 @@ class GameWindow < Gosu::Window
 		@player = Player.new()
 	end
 
-	def button_down(id)
-		close if id == Gosu::KbEscape
-		@player.action(:attack_close) if id == Gosu::KbA
-		@player.action(:attack_far) if id == Gosu::KbD
-	end
-
 	def update()
+		close if button_down?(Gosu::KbEscape)
 		@player.action(:up) if button_down?(Gosu::KbUp)
 		@player.action(:down) if button_down?(Gosu::KbDown)
 		@player.action(:right) if button_down?(Gosu::KbRight)

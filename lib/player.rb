@@ -2,7 +2,7 @@ class Player < MovingObject
 
 	def initialize()
 		super
-		@sprite = [$spritesheet[2], $spritesheet[3]]
+		@sprite = [$spritesheet[8], $spritesheet[9]]
 	end
 
 	def path_clear(x_target, y_target)
@@ -46,14 +46,6 @@ class Player < MovingObject
 					@x_target += -24
 				end
 			end
-		end
-
-		if action == :attack_close
-			Attack.new(@x_pos, @y_pos, :east, 1) 
-		end
-
-		if action == :attack_far
-			Attack.new(@x_pos, @y_pos, :east, 5) 
 		end
 
 	end
