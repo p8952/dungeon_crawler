@@ -10,8 +10,8 @@ class MovingObject < StaticObject
 	end
 
 	def path_clear(x_target, y_target)
-		if $game_window.cave.cells["#{x_target} #{y_target}"].nil? or
-		   $game_window.cave.cells["#{x_target} #{y_target}"].state == :blocking
+		if $cave.cells["#{x_target} #{y_target}"].nil? or
+		   $cave.cells["#{x_target} #{y_target}"].state == :blocking
 		   	return false
 		else
 			return true

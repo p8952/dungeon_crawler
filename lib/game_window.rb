@@ -1,15 +1,13 @@
 class GameWindow < Gosu::Window
 
-	attr_accessor :cave
-
 	def initialize()
 		super(720, 720, false)
 		self.caption = "Gosu"
 	
 		$spritesheet = Gosu::Image.load_tiles(self, 'media/spritesheet.png', 24, 24, false)
 		$game_objects = []
+		$cave = Cave.new(720, 720)
 		
-		@cave = Cave.new(720, 720)
 		@player = Player.new()
 		5.times { Creep.new() }
 	end

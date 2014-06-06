@@ -3,6 +3,16 @@ class Creep < MovingObject
 	def initialize()
 		super
 		@sprite = [$spritesheet[4], $spritesheet[5]]
+
+		@x_pos = (rand(720) / 24).round * 24
+		@y_pos = (rand(720) / 24).round * 24
+		until path_clear(@x_pos, @y_pos)
+			@x_pos = (rand(720) / 24).round * 24
+			@y_pos = (rand(720) / 24).round * 24
+		end
+
+		@x_target = @x_pos
+		@y_target = @y_pos
 	end
 
 	def update()
